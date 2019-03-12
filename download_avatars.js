@@ -4,6 +4,9 @@ var fs = require('fs');
 
 console.log('Welcome to the GitHub Avatar Downloader!')
 
+var repoOwner = process.argv[2];
+var repoName = process.argv[3];
+
 function getRepoContributors(repoOwner, repoName, cb) {
   var options = {
     url: "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
@@ -18,7 +21,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
   });
   }
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(repoOwner, repoName, function(err, result) {
   var data = JSON.parse(result);
 
   // console.log("Errors:", err);
