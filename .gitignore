@@ -1,5 +1,6 @@
 secrets.js
 
+
 # Logs
 logs
 *.log
@@ -83,3 +84,6 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# DS Store
+.DS_Store
