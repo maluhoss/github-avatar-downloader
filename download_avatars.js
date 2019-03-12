@@ -2,7 +2,7 @@ var request = require('request');
 var secrets = require('./secrets');
 var fs = require('fs');
 
-console.log('Welcome to the GitHub Avatar Downloader!')
+console.log('Welcome to the GitHub Avatar Downloader!');
 
 var repoOwner = process.argv[2];
 var repoName = process.argv[3];
@@ -19,40 +19,36 @@ function getRepoContributors(repoOwner, repoName, cb) {
   request(options, function(err, res, body) {
     cb(err, body);
   });
-  }
+}
 
 getRepoContributors(repoOwner, repoName, function(err, result) {
   var data = JSON.parse(result);
 
   if (!repoOwner || !repoName) {
     throw new Error('You must provide a repo owner and repo name');
-  }
-
-  // console.log("Errors:", err);
-  // console.log("Result:", data);
+  };
 
   data.forEach(function(indivData) {
-    // 'Name: ', indivData.login, indivData.avatar_url)
-    downloadImageByURL(indivData.avatar_url, "./avatars/" + indivData.login + '.jpg')
-  })
+    downloadImageByURL(indivData.avatar_url, "./avatars/" + indivData.login + '.jpg');
+  });
 });
+
 
 function downloadImageByURL(url, filePath) {
   var dir = './avatars';
-  console.log('Downloading file: ', filePath)
-
+  console.log('Downloading file: ', filePath);
 
   if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
-  }
+  };
 
   request.get(url)
   .on('error', function(err) {
     throw err;
   })
-  .pipe(fs.createWriteStream(filePath))
-}
+  .pipe(fs.createWriteStream(filePath));
+};
 
-console.log('Downloading Avatars...')
+console.log('Downloading Avatars...');
 
 
