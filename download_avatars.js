@@ -24,6 +24,10 @@ function getRepoContributors(repoOwner, repoName, cb) {
 getRepoContributors(repoOwner, repoName, function(err, result) {
   var data = JSON.parse(result);
 
+  if (!repoOwner || !repoName) {
+    throw new Error('You must provide a repo owner and repo name');
+  }
+
   // console.log("Errors:", err);
   // console.log("Result:", data);
 
